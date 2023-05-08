@@ -26,3 +26,19 @@ HttpEntity: HTTP header, body 정보를 편리하게 조회
 
 스프링MVC 내부에서 HTTP 메시지 바디를 읽어서 문자나 객체로 변환해서 전달해주는데, 이때 HTTP
 메시지 컨버터( HttpMessageConverter )라는 기능을 사용한다.
+
+
+
+요청 파라미터를 조회하는 기능: @RequestParam , @ModelAttribute 
+HTTP 메시지 바디를 직접 조회하는 기능: @RequestBody
+
+@ResponseBody 를 사용하면 응답 결과를 HTTP 메시지 바디에 직접 담아서 전달할 수 있다. 물론 이 경우에도 view를 사용하지 않는다.
+
+
+* @RequestBody
+    * - 메시지 바디 정보를 직접 조회(@RequestParam X, @ModelAttribute X)
+    * - HttpMessageConverter 사용 -> StringHttpMessageConverter 적용 *
+    - 
+    * @ResponseBody
+    * - 메시지 바디 정보 직접 반환(view 조회X)
+    * - HttpMessageConverter 사용 -> StringHttpMessageConverter 적용
