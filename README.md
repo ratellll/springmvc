@@ -42,3 +42,21 @@ HTTP 메시지 바디를 직접 조회하는 기능: @RequestBody
     * @ResponseBody
     * - 메시지 바디 정보 직접 반환(view 조회X)
     * - HttpMessageConverter 사용 -> StringHttpMessageConverter 적용
+
+
+
+스프링(서버)에서 응답 데이터를 만드는 방법은 크게 3가지이다.
+정적 리소스
+예) 웹 브라우저에 정적인 HTML, css, js를 제공할 때는, 정적 리소스를 사용한다.
+뷰 템플릿 사용
+예) 웹 브라우저에 동적인 HTML을 제공할 때는 뷰 템플릿을 사용한다.
+HTTP 메시지 사용
+HTTP API를 제공하는 경우에는 HTML이 아니라 데이터를 전달해야 하므로, HTTP 메시지 바디에 JSON 같은 형식으로 데이터를 실어 보낸다.
+
+
+
+String을 반환하는 경우 - View or HTTP 메시지
+@ResponseBody 가 없으면 response/hello 로 뷰 리졸버가 실행되어서 뷰를 찾고, 렌더링 한다. 
+@ResponseBody 가 있으면 뷰 리졸버를 실행하지 않고, HTTP 메시지 바디에 직접 response/hello 라는 문자가 입력된다.
+여기서는 뷰의 논리 이름인 response/hello 를 반환하면 다음 경로의 뷰 템플릿이 렌더링 되는 것을 확인할 수 있다.
+
