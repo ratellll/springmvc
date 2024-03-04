@@ -74,3 +74,10 @@ ResponseEntity 도 동일한 방식으로 동작한다.
 
 @ModelAttribute 는 객체들을 따로따로 정해주지않아도 값이 들어간다 (***.get 사용)
 생략도 가능하다
+
+
+Json을 넘길때는 @RequstBody는 생략 xx (modelAttribute로 적용됨)
+만약 생략시에 String , int Integer 같은 단순타입은 @RequestParam으로 인식
+나머지는 modelAttribute로 dlstlrgka
+
+
