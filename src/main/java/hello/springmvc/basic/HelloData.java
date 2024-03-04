@@ -8,4 +8,6 @@ public class HelloData {
 
     private String username;
     private int age;
+    private int size;
+    private int account;
 }

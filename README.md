@@ -71,3 +71,6 @@ ResponseEntity 도 동일한 방식으로 동작한다.
 @Controller 대신에 @RestController 애노테이션을 사용하면, 해당 컨트롤러에 모두 @ResponseBody 가 적용되는 효과가 있다. 
 따라서 뷰 템플릿을 사용하는 것이 아니라, HTTP 메시지 바디에 직접 데이터를 입력한다.
 이름 그대로 Rest API(HTTP API)를 만들 때 사용하는 컨트롤러이다.
+
+@ModelAttribute 는 객체들을 따로따로 정해주지않아도 값이 들어간다 (***.get 사용)
+생략도 가능하다

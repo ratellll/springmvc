@@ -2,10 +2,12 @@ package hello.springmvc.basic.request;
 
 
 
+import hello.springmvc.basic.HelloData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +19,6 @@ import java.util.Map;
 @Slf4j
 @Controller
 public class RequestParamController {
-
 
 
     @RequestMapping("/request-param-v1")
@@ -32,7 +33,6 @@ public class RequestParamController {
     }
 
 
-
     /**
      * @RequestParam 사용
      * - 파라미터 이름으로 바인딩
@@ -42,9 +42,9 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/request-param-v2")
     public String requestParamV2(@RequestParam("username") String memberName,
-                               @RequestParam("age") String memberage,
-                                @RequestParam("size") String membersize,
-                                           @RequestParam("account") String memberaccount) throws IOException {
+                                 @RequestParam("age") String memberage,
+                                 @RequestParam("size") String membersize,
+                                 @RequestParam("account") String memberaccount) throws IOException {
 
         log.info(memberName + "====" + memberage + "====" + membersize + "====" + memberaccount);
         return "ok";
@@ -61,11 +61,12 @@ public class RequestParamController {
     public String requestParamV3(@RequestParam String username,
                                  @RequestParam int age,
                                  @RequestParam int size,
-                                 @RequestParam  int account) throws IOException {
+                                 @RequestParam int account) throws IOException {
 
         log.info(username + "====" + age + "====" + size + "====" + account);
         return "ok";
     }
+
     /**
      * @RequestParam 사용
      * String, int 등의 단순 타입이면 @RequestParam 도 생략 가능
@@ -74,25 +75,23 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/request-param-v4")
     public String requestParamV4(String username,
-                                  int age,
-                                  int size,
-                                   int account) throws IOException {
+                                 int age,
+                                 int size,
+                                 int account) throws IOException {
 
         log.info(username + "====" + age + "====" + size + "====" + account);
         return "ok";
     }
 
     /**
-     * @RequestParam.required
-     *
-     * /request-param-required -> username이 없으므로 예외 *
+     * @RequestParam.required /request-param-required -> username이 없으므로 예외 *
      * 주의!
      * /request-param-required?username= -> 빈문자로 통과 *
      * 주의!
-     *
+     * <p>
      * /request-param-required
      * int age -> null을 int에 입력하는 것은 불가능, 따라서 Integer 변경해야 함(또는 다음에 나오는 defaultValue 사용)
-     *
+     * <p>
      * required 가 true 이면 파라미터 필수
      * required=false 이면 파라미터 필수 아님
      */
@@ -118,9 +117,9 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/request-param-default")
     public String requestParamDefault(@RequestParam(required = false, defaultValue = "-1") String username,
-                                       @RequestParam(required = false ,defaultValue = "-1") Integer age,
-                                       @RequestParam(required = false) Integer size,
-                                       @RequestParam(required = false) Integer account) throws IOException {
+                                      @RequestParam(required = false, defaultValue = "-1") Integer age,
+                                      @RequestParam(required = false) Integer size,
+                                      @RequestParam(required = false) Integer account) throws IOException {
 
         log.info(username + "====" + age + "====" + size + "====" + account);
         return "ok";
@@ -129,9 +128,24 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-map")
-    public String requestParamMap(@RequestParam Map<String ,Object> paramMap) throws IOException {
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap) throws IOException {
 
-        log.info(paramMap.get("username") + "====" + paramMap.get("age") + "====" + paramMap.get("size") + "====" +  paramMap.get("account"));
+        log.info(paramMap.get("username") + "====" + paramMap.get("age") + "====" + paramMap.get("size") + "====" + paramMap.get("account"));
         return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.info(helloData.getUsername() +"=="+ helloData.getAge() + "===" + helloData.getSize()+ "==="+ helloData.getAccount());
+        return "ok";
+
+    }
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.info(helloData.getUsername() +"=="+ helloData.getAge() + "===" + helloData.getSize()+ "==="+ helloData.getAccount());
+        return "ok";
+
     }
 }
